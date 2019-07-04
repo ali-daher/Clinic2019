@@ -1,0 +1,47 @@
+<header>
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom mb-3">
+
+    <a class="navbar-brand mb-0 h1" [routerLink]='["/home"]'>
+      <img src="/icons/heartbeat.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+      Clinical Information System
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+      <ul class="navbar-nav flex-grow-2">
+        <li class="nav-item" *ngIf="!(LoginStatus$ | async) as LoginStatus">
+          <a class="nav-link text-dark" *ngIf="LoginStatus" [routerLink]='["/home"]'>Home</a>
+        </li>
+        <li class="nav-item" *ngIf="!(LoginStatus$ | async) as LoginStatus">
+          <a class="btn btn-primary" *ngIf="LoginStatus" [routerLink]='["/login"]'>Login</a>
+        </li>
+        <li class="nav-item btn-group" *ngIf="(LoginStatus$ | async) as LoginStatus">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="(UserRole$ | async)=='Admin'">
+            Doctor
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" *ngIf="LoginStatus" [routerLink]='["/doctor/register"]'> Register</a>
+            <a class="dropdown-item" *ngIf="LoginStatus">Update</a>
+          </div>
+        </li>
+        <li class="nav-item btn-group" *ngIf="(LoginStatus$ | async) as LoginStatus">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="(UserName$ | async) as UserName">
+            {{UserName}}
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" *ngIf="LoginStatus" [routerLink]='["/home"]'> <img src="/icons/home.svg" width="30" height="30" class="d-inline-block align-top" alt="" style="padding-right: 7px;padding-bottom: 7px;">Home</a>
+            <a class="dropdown-item" *ngIf="LoginStatus"><img src="/icons/profile.svg" width="30" height="30" class="d-inline-block align-top" alt="" style="padding-right: 7px;padding-bottom: 7px;">Profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="onLogout()" *ngIf="LoginStatus"><img src="/icons/logout.svg" width="30" height="30" class="d-inline-block align-top" alt="" style="padding-right: 7px;padding-bottom: 7px;">Logout</a>
+          </div>
+        </li>
+      </ul>
+
+
+    </div>
+
+  </nav>
+</header>
+
