@@ -59,7 +59,7 @@ namespace Clinic.Controllers
                     result.Add(doctorModel);
                     }
 
-                    return Ok(new JsonResult(result)); 
+                    return Ok(result); 
             }
              else 
                  return BadRequest(new JsonResult("No Doctors to show"));
